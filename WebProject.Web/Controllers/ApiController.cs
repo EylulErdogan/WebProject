@@ -85,6 +85,7 @@ namespace WebProject.Web.Controllers
                 template = template.Replace("[quantity]",q.ToString());
                 result += template;
                 template = temp;
+
             }
 
             return result;
