@@ -1,0 +1,55 @@
+﻿
+<header>
+	<div class="header-main sticky-nav ">
+		<div class="container position-relative">
+			<div class="row">
+				<div class="col-auto align-self-center">
+					<div class="header-logo">
+						<a href="/"><img src="/assets/images/logo/logo.png" alt="Site Logo" /></a>
+					</div>
+				</div>
+				@await Component.InvokeAsync("MainMenu")
+				@await Component.InvokeAsync("LoginModal",new LoginViewModel())
+				<!-- Header Action Start -->
+				<div class="col col-lg-auto align-self-center pl-0">
+					<div class="header-actions">
+						@if (string.IsNullOrEmpty(@ViewBag.FullName))
+						{
+							@*<a href="/admin/home/login" class="header-action-btn login-btn">Admin Panel</a>*@
+							<a href="#loginActive" class="header-action-btn login-btn" data-bs-toggle="modal"
+							   data-bs-target="#loginActive">Giriş Yap</a>
+							<a href="/login" class="header-action-btn login-btn">Kayıt Ol</a>
+						}
+						else
+						{
+							<div>Hoş Geldiniz, @ViewBag.FullName </div>
+							@Html.ActionLink("Çıkış Yap", "Exit","Authentication", new { @class = "header-action-btn" })
+						}
+						<a href="#" class="header-action-btn" data-bs-toggle="modal" data-bs-target="#searchActive">
+							<i class="pe-7s-search"></i>
+						</a>
+						<!-- Single Wedge End -->
+						<!-- Single Wedge Start -->
+						<a href="#offcanvas-wishlist" class="header-action-btn offcanvas-toggle">
+							<i class="pe-7s-like"></i>
+						</a>
+						<!-- Single Wedge End -->
+						<a href="#offcanvas-cart"
+						   class="header-action-btn header-action-btn-cart offcanvas-toggle pr-0">
+							<i class="pe-7s-shopbag"></i>
+							<span class="header-action-num" id ="basketCount">0</span>
+							<!-- <span class="cart-amount">€30.00</span> -->
+						</a>
+						<a href="#offcanvas-mobile-menu"
+						   class="header-action-btn header-action-btn-menu offcanvas-toggle d-lg-none">
+							<i class="pe-7s-menu"></i>
+						</a>
+					</div>
+					<!-- Header Action End -->
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+</header>

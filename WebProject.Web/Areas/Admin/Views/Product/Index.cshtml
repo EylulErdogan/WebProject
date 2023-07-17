@@ -1,0 +1,85 @@
+﻿@using WebProject.Entities
+@model IList<WebProject.Entities.Product>
+@{
+	Layout = "_Layout";
+}
+<div>
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="container-fluid">
+							
+			<div class="row mb-2">
+				<div class="col-sm-11">
+					<h1>Ürünler</h1>
+				</div>
+				<div class="col-sm-1">
+					<a class="btn btn-block bg-gradient-primary btn btn-app d-flex align-items-center justify-content-center" type="button" style="margin-right: 10px" href="/admin/product/addProduct">
+						<i class="fa fa-solid fa-plus"></i>
+					</a>
+				</div>
+			</div>
+		</div><!-- /.container-fluid -->
+	</section>
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<!-- /.card-header -->
+						<div class="card-body">
+							<table id="example2" class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<th>Ürün Adı</th>
+										<th>Ürün Açıklaması</th>
+										<th>Fotoğraf</th>
+										<th>Fiyatı</th>
+										<th class="col-1">Action</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									@foreach (var product in Model)
+									{
+										var imageUrl = @product.ProductImages.Where(x => x.IsCover).Select(i => i.ImageUrl).FirstOrDefault();
+										<tr>
+											<td>@product.Name</td>
+											<td>@product.ProductDescription</td>
+											<td><img height="50px" src="@imageUrl" /></td>
+											<td>@product.Price</td>
+											<td class="d-flex align-items-center justify-content-start">
+
+												<a class="btn bg-gradient-info d-flex align-items-center justify-content-center" type="button" style="margin-right: 10px" href="@Url.Action("UpdateProduct","Product", new { id = product.Id})">
+													<i class="fa fa-solid fa-edit"></i>
+												</a>
+												<a class="btn bg-gradient-danger d-flex align-items-center justify-content-center"  type="button" style="margin-right: 10px" href="@Url.Action("DeleteProduct","Product", new { id = product.Id})">
+													<i class="fa fa-solid fa-trash"></i>
+												</a>
+
+											</td>
+										</tr>
+									}
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>Ürün Adı</th>
+										<th>Ürün Açıklaması</th>
+										<th>Fotoğraf</th>
+										<th>Fiyatı</th>
+										<th>Action</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+	</section>
+</div>

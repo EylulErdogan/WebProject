@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using WebProject.Entities
+@model WebProject.Web.Areas.Admin.Models.CategoryModel
+@{
+	Layout = "_Layout";
+}
+<div class="card">
+	<div class="card-body card-body">
+		<h2>Kategori Güncelle</h2>
+		<form asp-controller="Category" asp-action="UpdateCategory" method="post">
+			<div class="modal-body row">
+				<div class="input-group mb-3 col-6">
+					<div class="form-group col">
+						<label for="Name">Kategori Adı</label>
+						<input class="form-control" type="text" asp-for="Name" placeholder="Kategory Adı" />
+					</div>
+				</div>
+				<div class="input-group mb-3 col-6">
+					<div class="form-group col">
+						<label for="Link">Kategori Linki</label>
+						<input class="form-control" type="text" asp-for="Link" placeholder="Kategori Linki" />
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer justify-content-between">
+				<a type="button" class="btn btn-default" href="/admin/category/index">
+					Kapat
+				</a>
+				<button type="submit" class="btn btn-primary">Kategori Güncelle</button>
+			</div>
+		</form>
+	</div>
+</div>

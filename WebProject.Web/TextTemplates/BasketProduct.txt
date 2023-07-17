@@ -1,0 +1,1 @@
+﻿ <li> <a href="[link]" class="image"> <img src="[img]" alt="Cart product Image"> </a> <div class="content"> <a href="single-product.html" class="title">[name]</a> <span class="quantity-price">[quantity] x <span class="amount">[total]</span></span> <a href="#" class="remove">×</a> </div></li>

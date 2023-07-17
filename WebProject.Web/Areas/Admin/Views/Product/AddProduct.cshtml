@@ -1,0 +1,65 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using WebProject.Entities
+@model WebProject.Web.Areas.Admin.Models.ProductModel
+@{
+	Layout = "_Layout";
+}
+<div class="card">
+	<div class="card-body card-body">
+		<h2>Yeni Ürün Ekle</h2>
+		<form asp-controller="Product" asp-action="AddProduct" method="post" enctype="multipart/form-data">
+			<div class="modal-body row">
+				<div class="input-group mb-3 col-6">
+					<div class="form-group col">
+						<label for="Categories">Kategori</label>
+						<select asp-for="SelectedCategoryIds" class="select2" multiple="multiple" data-placeholder="Kategori seç" style="width: 100%;">
+
+							@foreach (var category in Model.Categories)
+							{
+								<option value="@category.Id">@category.Name</option>
+							}
+						</select>
+					</div>
+				</div>
+				<div class="input-group mb-3 col-6">
+					<div class="form-group col">
+						<label for="Name">Ürün Adı</label>
+						<input class="form-control" type="text" asp-for="Name" placeholder="Ürün Adı" />
+					</div>
+				</div>
+				<div class="input-group mb-3 col-6">
+					<div class="form-group col">
+						<label for="Price">Ürün Fiyatı</label>
+						<input class="form-control" type="decimal" asp-for="Price" placeholder="Ürün Fiyatı" />
+					</div>
+				</div>
+				<div class="input-group mb-3 col-6">
+					<div class="form-group col">
+						<label for="SeoLink">Ürün Linki</label>
+						<input class="form-control" type="text" asp-for="SeoLink" placeholder="Ürün Linki" />
+					</div>
+				</div>
+				<div class="input-group mb-3 col-6">
+					<div class="form-group col">
+						<label for="ProductImages">Ürün Fotosu</label>
+						<input class="form-control" type="file" asp-for="ProductImages" placeholder="Ürün Fotosu" multiple="true" accept="image/*" />
+						
+					</div>
+				</div>
+				<div class="input-group mb-3 col-6">
+					<div class="form-group col">
+						<label for="ProductDescription">Ürün Açıklaması</label>
+						<input class="form-control" type="text" asp-for="ProductDescription" placeholder="Ürün Açıklaması" />
+						
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer justify-content-between">
+				<a type="button" class="btn btn-default" href="/admin/product/index">
+					Kapat
+				</a>
+				<button type="submit" class="btn btn-primary">Ürün Ekle</button>
+			</div>
+		</form>
+	</div>
+</div>

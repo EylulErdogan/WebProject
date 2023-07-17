@@ -1,0 +1,16 @@
+﻿@model RegisterViewModel
+
+<div id="lg1" class="tab-pane active">
+	<div class="login-form-container">
+		<div class="login-register-form">
+			<form asp-controller="Authentication" asp-action ="Register" method="post">
+				<input type="text" asp-for="FullName" placeholder="FullName" />
+				<input type="email" asp-for="Email" placeholder="Email" />
+				<input type="password" asp-for="Password" placeholder="Password" />
+				<div class="button-box">
+					<button type="submit"><span>Register</span></button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

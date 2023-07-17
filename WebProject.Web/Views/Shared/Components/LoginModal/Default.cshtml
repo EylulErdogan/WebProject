@@ -1,0 +1,26 @@
+﻿@model LoginViewModel
+@{
+	Layout = null;
+}
+<!-- Login Modal Start -->
+<div class="modal popup-login-style" id="loginActive">
+	<button type="button" class="close-btn" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+	<div class="modal-overlay">
+		<div class="modal-dialog p-0" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="login-content">
+						<h2>Log in</h2>
+						<h3>Log in your account</h3>
+						<form asp-controller="Authentication" asp-action ="Login" method="post">
+							<input type="text" asp-for="Email" placeholder="Email">
+							<input type="password" asp-for="Password" placeholder="Password">
+							<button type="submit"><span>Login</span></button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Login Modal End -->

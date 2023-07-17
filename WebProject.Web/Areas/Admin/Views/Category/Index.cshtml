@@ -1,0 +1,81 @@
+﻿@using WebProject.Entities
+@model IList<WebProject.Entities.Category>
+@{
+	Layout = "_Layout";
+}
+<div>
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+		<div class="container-fluid">
+
+			<div class="row mb-2">
+				<div class="col-sm-11">
+					<h1>Kategoriler</h1>
+				</div>
+				<div class="col-sm-1">
+					<a class="btn btn-block bg-gradient-primary btn btn-app d-flex align-items-center justify-content-center" type="button" style="margin-right: 10px" href="/admin/category/addCategory">
+						<i class="fa fa-solid fa-plus"></i>
+					</a>
+				</div>
+			</div>
+		</div><!-- /.container-fluid -->
+	</section>
+	<section class="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<!-- /.card-header -->
+						<div class="card-body">
+							<table id="example2" class="table table-bordered table-hover">
+								<thead>
+									<tr>
+										<th>Kategori Adı</th>
+										<th>Alt Kategoriler</th>
+										<th>Kategori Link</th>
+										<th class="col-1">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+								@foreach (var category in Model)
+								{
+									<tr>
+										<td>@category.Name</td>
+										<td>@category.ParentId</td>
+											<td>@category.Link</td>
+										<td class="d-flex align-items-center justify-content-start">
+
+											<a class="btn bg-gradient-info d-flex align-items-center justify-content-center" type="button" style="margin-right: 10px" href="@Url.Action("UpdateCategory","Category", new { id = category.Id})">
+												<i class="fa fa-solid fa-edit"></i>
+											</a>
+											<a class="btn bg-gradient-danger d-flex align-items-center justify-content-center"  type="button" style="margin-right: 10px" href="@Url.Action("DeleteCategory","Category", new { id = category.Id})">
+												<i class="fa fa-solid fa-trash"></i>
+											</a>
+
+										</td>
+											
+
+									</tr>
+								}
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>Kategori Adı</th>
+										<th>Alt Kategoriler</th>
+										<th>Action</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+						<!-- /.card-body -->
+					</div>
+					<!-- /.card -->
+
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</div>
+		<!-- /.container-fluid -->
+	</section>
+</div>
