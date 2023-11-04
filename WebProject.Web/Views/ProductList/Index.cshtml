@@ -9,7 +9,6 @@
 				<!-- Shop Top Area Start -->
 				<div class="shop-top-bar d-flex">
 					<!-- Left Side start -->
-					<p><span>12</span> Product Found of <span>30</span></p>
 					<!-- Left Side End -->
 					<div class="shop-tab nav">
 						<a class="active" href="#shop-grid" data-bs-toggle="tab">
@@ -71,9 +70,9 @@
 															<a href="compare.html" class="action compare"
 															   title="Compare"><i class="pe-7s-refresh-2"></i></a>
 														</div>
-														<button title="Add To Cart" onclick="AddToBasket(@item.Id)" class=" add-to-cart">
+														<a title="Add To Cart" href="@Html.ActionLink("lalala","Api","AddBasket")" class=" add-to-cart">
 															Sepete Ekle
-														</button>
+														</a>
 													</div>
 													<div class="content">
 														<span class="ratings">
@@ -170,10 +169,6 @@
 				</body>
 				</html>*@
 				
-				<div class="load-more-items text-center mb-md-60px mb-lm-60px mt-30px0px" data-aos="fade-up">
-					<a href="/kategory/@Model.CurrentCategory/(@Model.CurrentPage+1)" class="btn btn-lg btn-primary btn-hover-dark m-auto"> Load More <i
-						                                                                                                                                  class="fa fa-refresh ml-15px" aria-hidden="true"></i></a>
-				</div>
 
 					<!--  Pagination Area End -->
 				</div>

@@ -12,7 +12,7 @@ using WebProject.Entities;
 namespace WebProject.Data.Concrete
 {
 	//3. Adım tablo eklendi sonra Contex e dbset eklenir
-	public class CategoryDal : EfEntityRepostoryBase<Category,WebProjectContext>,ICategoryDal
+	public class CategoryDal : EfEntityRepostoryBase<Category, WebProjectContext>, ICategoryDal
 	{
 		public IList<Category> GetAllCategoryIncluded(Expression<Func<Category, bool>> filter)
 		{
@@ -20,16 +20,16 @@ namespace WebProject.Data.Concrete
 			{
 				var query = context.Categories
 					.Include(x => x.ProductCategories);
-			
 
-			if (filter == null)
-			{
-				return  query.ToList();
-			}
-			else
-			{
-				return query.Where(filter).ToList();
-			}
+
+				if (filter == null)
+				{
+					return query.ToList();
+				}
+				else
+				{
+					return query.Where(filter).ToList();
+				}
 
 			}
 		}

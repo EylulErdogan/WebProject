@@ -12,6 +12,7 @@ namespace WebProject.Web.Areas.Admin.Models
 	    public string ProductDescription { get; set; }
 	    public int[] SelectedCategoryIds{ get; set; }
 	    public string ImageUrl { get; set; }
+	    public bool IsPopular{ get; set; }
 	    public IList<Category>Categories { get; set; }
 	    public IList<ProductImage> ProductImages { get; set; }
 	    public IList<ProductCategory> ProductCategories { get; set; }

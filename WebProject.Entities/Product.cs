@@ -15,6 +15,7 @@ namespace WebProject.Entities
 		public int? BrendId { get; set; }
 		public string SeoLink { get; set; }
 		public string ProductDescription { get; set; }
+		public bool IsPopular { get; set; }
 
 		public IList<ProductImage> ProductImages { get; set; }
 		public IList<ProductCategory> ProductCategories{ get; set; }

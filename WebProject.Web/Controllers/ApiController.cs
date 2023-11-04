@@ -40,9 +40,34 @@ namespace WebProject.Web.Controllers
 
             return Json(model);
         }
+		[HttpGet]
+		public ActionResult RemoveFromBasket(int productId, string guidKey)
+		{
+			var result = _apiControllerHandler.CheckBasket(Request, Response);
+			_apiControllerHandler.RemoveFromBasket(productId, result.ToString());
+			BasketModel model = new BasketModel();
+			model.BasketProducts = _apiControllerHandler.GetBasketProducts(result.ToString());
+			model.Quantity = model.BasketProducts.Sum(x => x.Quantity);
+			int[] ids = model.BasketProducts.Select(x => x.ProductId).ToArray();
+			var basketProductList =
+				_apiControllerHandler.GetBasketProductCalculatePrice(ids);
+			decimal totalPrice = 0;
+			foreach (var product in basketProductList)
+			{
+				var q = model.BasketProducts.FirstOrDefault(x => x.ProductId == product.Id).Quantity;
+				totalPrice += product.Price * q;
+
+			}
+			model.TotalPrice = totalPrice;
+
+			var productHtml = GenerateProducts(basketProductList, model);
+			model.ProductHtml = productHtml;
+
+			return RedirectToAction("Index", "Home");
+		}
 
 
-        [HttpPost]
+		[HttpPost]
         public JsonResult GetBasket()
         {
             var result = _apiControllerHandler.CheckBasket(Request, Response);
@@ -83,6 +108,7 @@ namespace WebProject.Web.Controllers
                 template = template.Replace("[total]", (item.Price).ToString("C"));
 
                 template = template.Replace("[quantity]",q.ToString());
+                template = template.Replace("[remove]", $"/Api/RemoveFromBasket?productId={item.Id}");
                 result += template;
                 template = temp;
 

@@ -62,6 +62,10 @@ namespace WebProject.Business.ControllerHandler
         public void AddBasketProduct(int productId, int quantity, string guidKey)
         {
             _basketProductService.Add(productId,quantity,guidKey);
+        }        
+        public void RemoveFromBasket(int productId, string guidKey)
+        {
+            _basketProductService.Remove(productId,guidKey);
         }
 
         public IList<BasketProduct> GetBasketProducts(string guidKey)
@@ -94,6 +98,7 @@ namespace WebProject.Business.ControllerHandler
         Guid CheckBasket(HttpRequest request,HttpResponse response);
         void CreateBasket(Guid guid);
         void AddBasketProduct(int productId, int quantity, string guidKey);
+        void RemoveFromBasket(int productId, string guidKey);
 
         IList<BasketProduct> GetBasketProducts(string guidKey);
         IList<Product> GetBasketProductCalculatePrice(int[] products);

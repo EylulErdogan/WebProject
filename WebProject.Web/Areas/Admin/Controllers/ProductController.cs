@@ -107,6 +107,7 @@ namespace WebProject.Web.Areas.Admin.Controllers
 				Id = product.Id,
 				ProductImages = product.ProductImages,
 				ProductCategories = product.ProductCategories,
+				IsPopular = product.IsPopular,
 			};
 			productModel.Categories = _categoryControllerHandler.GetCategories().Where(x=>x.ParentId == 0).ToList();
 			productModel.SelectedCategoryIds = productModel.ProductCategories.Select(x => x.CategoryId).ToArray();
@@ -150,14 +151,11 @@ namespace WebProject.Web.Areas.Admin.Controllers
 			{
 				//sonra Product Images tablosundaki url içindeki gerçek foto silinecek
 				var fileUrl = Path.Combine(Path.Combine(imageRootUrl, "product-image"), productImage.FileName);
-
 				System.IO.File.Delete(fileUrl);
 			//sonra Product Images silinecek
 				_productControllerHandler.DeleteProductImage(productImage);
 			}
 			//sonra product silinecek
-
-
 			_productControllerHandler.DeleteProduct(id);
 
 

@@ -1,111 +1,83 @@
 ﻿@model ProductAreaModel
 <div class="product-area pt-100px pb-100px">
-@{
-	var selectedCategoryId = 0;
-	<div class="container">
-		<!-- Section Title & Tab Start -->
-		<div class="row">
-			<!-- Section Title Start -->
-			<div class="col-12">
-				<div class="section-title text-center mb-0">
-					<h2 class="title">YENİ ÜRÜNLER</h2>
-					<!-- Tab Start -->
-					<div class="nav-center">
-						<ul class="product-tab-nav nav align-items-center justify-content-center">
-							@foreach (var item in Model.Categories)
-							{
-								var aClass = "nav-link";
-								@if (item.Id == 3){
-									aClass +=" active";
-								}
-								<li class="nav-item">
-									<a class="@aClass" data-bs-toggle="tab"
-										   href="#ca_@item.Id" onclick="() => @selectedCategoryId = @item.Id)">@item.Name</a>
-								</li>
-							}
-
-						</ul>
+	@{
+		var selectedCategoryId = 0;
+		<div class="container">
+			<!-- Section Title & Tab Start -->
+			<div class="row">
+				<!-- Section Title Start -->
+				<div class="col-12">
+					<div class="section-title text-center mb-0">
+						<h2 class="title">POPÜLER ÜRÜNLER</h2>
 					</div>
-					<!-- Tab End -->
 				</div>
+				<!-- Section Title End -->
 			</div>
-			<!-- Section Title End -->
-		</div>
-		<!-- Section Title & Tab End -->
+			<!-- Section Title & Tab End -->
 
-		<div class="row">
-			<div class="col">
-				<div class="tab-content mb-30px0px">
-					
+			<div class="row">
+				<div class="col">
+					<div class="row tab-content mb-30px0px">
+
 						<!-- 1st tab start -->
-						@foreach (var item in Model.Categories)
+						@foreach (var product in Model.Products.Where(x => x.IsPopular).ToList())
 						{
-							<div class="tab-pane fade show active" id="@item.Id">
-								<div class="row">
-									@foreach (var itemSub in Model.ProductCategories.Where(x => x.CategoryId == item.Id || x.CategoryId == item.ParentId).Take(8).ToList())
-									{
-										var product = Model.Products.FirstOrDefault(x => x.Id == itemSub.ProductId);
-										<div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px" data-aos="fade-up"
-										     data-aos-delay="200">
-											<!-- Single Prodect -->
-											<div class="product">
-												<div class="thumb">
-													<a href="/urun/@product.SeoLink" class="image">
-														<img src="@Model.ProductImages.FirstOrDefault(x => x.ProductId == itemSub.ProductId)?.ImageUrl" alt="Product"/>
-														<img class="hover-image" src="@Model.ProductImages?.FirstOrDefault(x => x.ProductId == itemSub.ProductId)?.ImageUrl"
-														     alt="Product" style="width: 270px; height: 270px;"/>
-													</a>
-													<span class="badges">
-														<span class="new">New</span>
-													</span>
-													<div class="actions">
-														<a href="wishlist.html" class="action wishlist" title="Wishlist">
-															<i class="pe-7s-like"></i>
-														</a>
-														<a href="#" class="action quickview" data-link-action="quickview"
-														   title="Quick view" data-bs-toggle="modal"
-														   data-bs-target="#exampleModal"><i class="pe-7s-search"></i></a>
-														<a href="compare.html" class="action compare" title="Compare">
-															<i class="pe-7s-refresh-2"></i>
-														</a>
-													</div>
-													<button title="Add To Cart" onclick="AddToBasket(@product.Id)" class=" add-to-cart">
-														Sepete Ekle
-													</button>
-												</div>
-												<div class="content">
-													<span class="ratings">
-														<span class="rating-wrap">
-															<span class="star" style="width: 100%"></span>
-														</span>
-														<span class="rating-num">( 5 Review )</span>
-													</span>
-													<h5 class="title">
-														<a href="/urun/@product.SeoLink">
-															@product.Name
-														</a>
-													</h5>
-													<span class="price">
-														<span class="new">@product.Price.ToString("C")</span>
-													</span>
-												</div>
-											</div>
+							<div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px" data-aos="fade-up"
+								 data-aos-delay="200">
+								<!-- Single Prodect -->
+								<div class="product">
+									<div class="thumb">
+										<a href="/urun/@product.SeoLink" class="image">
+											<img src="@Model.ProductImages.FirstOrDefault(x => x.ProductId == product.Id)?.ImageUrl" alt="Product" />
+											<img class="hover-image" src="@Model.ProductImages?.FirstOrDefault(x => x.ProductId == product.Id)?.ImageUrl"
+												 alt="Product" style="width: 270px; height: 270px;" />
+										</a>
+										<span class="badges">
+											<span class="new">New</span>
+										</span>
+										<div class="actions">
+											<a href="wishlist.html" class="action wishlist" title="Wishlist">
+												<i class="pe-7s-like"></i>
+											</a>
+											<a href="#" class="action quickview" data-link-action="quickview"
+											   title="Quick view" data-bs-toggle="modal"
+											   data-bs-target="#exampleModal"><i class="pe-7s-search"></i></a>
+											<a href="compare.html" class="action compare" title="Compare">
+												<i class="pe-7s-refresh-2"></i>
+											</a>
 										</div>
-									}
+										<button title="Add To Cart" onclick="AddToBasket(@product.Id)" class=" add-to-cart">
+											Sepete Ekle
+										</button>
+									</div>
+									<div class="content">
+										<span class="ratings">
+											<span class="rating-wrap">
+												<span class="star" style="width: 100%"></span>
+											</span>
+											<span class="rating-num">( 5 Review )</span>
+										</span>
+										<h5 class="title">
+											<a href="/urun/@product.SeoLink">
+												@product.Name
+											</a>
+										</h5>
+										<span class="price">
+											<span class="new">@product.Price.ToString("C")</span>
+										</span>
+									</div>
 								</div>
 							</div>
 						}
-						<!-- 1st tab end -->
-					
 
+						<!-- 1st tab end -->
+
+
+					</div>
 				</div>
-				<a href="shop-left-sidebar.html" class="btn btn-lg btn-primary btn-hover-dark m-auto">
-					Load More <i class="fa fa-arrow-right ml-15px" aria-hidden="true"></i>
-				</a>
 			</div>
 		</div>
-	</div>
-}
+	}
 </div>
 <script type="text/javascript">
 	function selectCategory(categoryId) {

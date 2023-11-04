@@ -21,7 +21,6 @@ namespace WebProject.Business.ComponentHandler
 			_cookieHelper = cookieHelper;
 			_userService = userService;
 		}
-
 		public User GetUserData(string guidKey, HttpRequest request)
 		{
 			// Bug: cookie silindi ise null

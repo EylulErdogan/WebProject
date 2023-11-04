@@ -8,5 +8,6 @@ namespace WebProject.Web.Models
         public int Quantity { get; set; }
         public  decimal TotalPrice { get; set; }
         public string ProductHtml { get; set; }
+        public string GuidKey { get; set; }
     }
 }

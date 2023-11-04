@@ -37,6 +37,17 @@ namespace WebProject.Business.Services
             product.AddDate = DateTime.Now;
 
             _basketProductDal.Add(product);
+        }        
+        public void Remove(int productId, string guidKey)
+        {
+            var parsed = Guid.Parse(guidKey);
+            var checkProduct = _basketProductDal.Get(x =>
+                 x.ProductId == productId && x.Status != false && x.BasketId == parsed);
+            if (checkProduct != null)
+            {
+                _basketProductDal.Delete(checkProduct);
+                return;
+            }
         }
 
         public IList<BasketProduct> List(string guidKey)
@@ -56,6 +67,7 @@ namespace WebProject.Business.Services
     public interface IBasketProductService
     {
         void Add(int productId, int quantity, string guidKey);
+        void Remove(int productId, string guidKey);
 
         IList<BasketProduct> List(string guidkey);
         IList<VwBasketProductList> VwBasketProductList(string guidKey);
